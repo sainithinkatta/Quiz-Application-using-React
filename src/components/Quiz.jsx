@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import QUESTIONS from '../questions.js';
+import quizComplete from '../assets/quiz-complete.png';
 
 export default function Quiz () {
     const [ userAnswers, setUserAnswers ] = useState([]);
     const activeQuestionIndex = userAnswers.length;
+    const isQuizComplete = activeQuestionIndex === QUESTIONS.length;
 
     function handleAnswerSelection (currentSelectedAnswer) {
         setUserAnswers((prevSelectedAnswers) => {
@@ -11,6 +13,19 @@ export default function Quiz () {
         });
     }
     
+    if (isQuizComplete) {
+        return (
+            <div id="summary">
+                <img 
+                    src={quizComplete} 
+                    alt="Quiz Completed"
+                />
+
+                <h2>Quiz Completed</h2>
+            </div>
+        )
+    }
+
     return (
        <div id="quiz">
             <div id="question">
